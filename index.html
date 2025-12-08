@@ -1,599 +1,524 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Daniel Esteban Ortega Valencia</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-        type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Premium</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/a2e0e9e1dc.js" crossorigin="anonymous"></script>
+
+    <!-- ScrollReveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+
+/* -------------------------------------------------------------
+------------------------ GLOBAL STYLE --------------------------
+--------------------------------------------------------------*/
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+    background: rgba(0,0,0,0.6) !important;
+    backdrop-filter: blur(12px);
+    padding: 15px 0;
+}
+
+/* Cursor premium */
+.cursor {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform .12s ease-out;
+}
+
+/* -------------------------------------------------------------
+------------------------ HERO SECTION --------------------------
+--------------------------------------------------------------*/
+#hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#particles {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: -2;
+}
+
+#hero3d {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: -3;
+}
+
+#hero h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+}
+
+/* -------------------------------------------------------------
+------------------------ SOBRE MI ------------------------------
+--------------------------------------------------------------*/
+
+.perfil-img {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 0 35px rgba(255,255,255,0.25);
+    transition: .4s;
+}
+.perfil-img:hover {
+    transform: scale(1.05);
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* -------------------------------------------------------------
+-------------------------- PROYECTOS ---------------------------
+--------------------------------------------------------------*/
+
+.projects-section {
+    background: #fff;
+    color: #000;
+    padding: 140px 20px;
+}
+
+.projects-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.projects-title {
+    font-size: 3.8rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.projects-subtitle {
+    font-size: 1.3rem;
+    color: #555;
+    max-width: 600px;
+    text-align: center;
+    margin: 15px auto 50px;
+}
+
+/* Filtros */
+.category-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border-radius: 25px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: .3s;
+}
+.filter-btn:hover {
+    background: #e6e6e6;
+}
+.filter-btn.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+/* Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 30px;
+}
+
+/* Card estilo Apple */
+.project-card {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: .3s;
+}
+.project-card:hover {
+    transform: scale(1.035);
+    box-shadow: 0 12px 45px rgba(0,0,0,0.15);
+}
+
+.project-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+.project-desc {
+    color: #555;
+    margin-top: 8px;
+}
+
+/* No results */
+.no-results {
+    display:none;
+    color:#777;
+    text-align:center;
+    margin-top:50px;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.modal-content {
+    background:#fff;
+    width: 75%;
+    padding: 35px;
+    border-radius: 20px;
+    color:#000;
+    position: relative;
+    animation: modalShow .4s forwards;
+}
+@keyframes modalShow {
+    from {opacity:0; transform: scale(.7);}
+    to {opacity:1; transform: scale(1);}
+}
+
+.modal-close {
+    position:absolute;
+    right:20px;
+    top:10px;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+#modalCanvas {
+    width: 100%;
+    height: 350px;
+    margin-top: 20px;
+}
+
+/* -------------------------------------------------------------
+---------------------------- CONTACTO --------------------------
+--------------------------------------------------------------*/
+
+.contact-section {
+    background:#0a0a0a;
+    padding:100px 20px;
+    text-align:center;
+}
+
+.social-icons a {
+    font-size: 2.8rem;
+    margin: 0 18px;
+    color:white;
+    transition:.3s;
+}
+.social-icons a:hover {
+    color:#999;
+}
+</style>
 </head>
 
-<body id="page-top">
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand" href="#page-top">Ingeniero de Sistemas</a>
-            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
-                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
-                aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#portfolio">proyectos</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">Acerca
-                            de</a></li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                            href="#contact">Contacto</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- Masthead-->
-    <header class="masthead bg-dark text-white text-center">
-        <!--Imagen-->
-        <div class="row">
-            <div class="col-lg-6">
-                <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Transformando ideas en realidad digital</h1>
-                <!-- Icon Divider-->
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Soluciones innovadoras con tecnologías de
-                    vanguardia, diseño excepcional y código que inspira.</p>
-            </div>
-            <div class="col-lg-6">
-                <div class="container d-flex align-items-center flex-column">
-                    <!-- Masthead Avatar Image-->
-                    <img class="masthead-avatar mb-5" src="assets/perfil.png" alt="..." />
-                </div>
-                <h2>Daniel Esteban Ortega Valencia</h2>
-            </div>
-        </div>
+<body>
 
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
 
-
-
-    </header>
-
-    <!-- Portfolio Section-->
-    <section style="box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2);" class="page-section portfolio" id="portfolio">
-        <div class="container">
-            <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Frontend</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Portfolio Grid Items-->
-            <div class="row justify-content-center">
-                <!-- Portfolio Item 1-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350px">
-                            <img class="card-img-top" src="assets/1.jpg" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">HTML Y CSS</h4>
-                                <p class="card-text">Conosco sobre las etiquetas de html y diseño puro de la tecnologia
-                                    de css.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio Item 2-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350">
-                            <img class="card-img-top" src="assets/2.jpg" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">BOOTSTRAP</h4>
-                                <p class="card-text">Conosco sobre los metodos de diseño que implementa bootstrap.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio Item 3-->
-                <div class="col-md-6 col-lg-4 mb-5">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350">
-                            <img class="card-img-top" src="assets/3.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">PRIMEFACES</h4>
-                                <p class="card-text">Conosco sobre el patron de diseño de primefaces el cual se integra
-                                    muy bien en proyectos jsf.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Backend </h2>
-                <!-- Icon Divider-->
-                <div class="divider-custom">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Portfolio Item 4-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350">
-                            <img class="card-img-top" src="assets/4.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">JAVA</h4>
-                                <p class="card-text">Mi mayor fuerte a la hora de programar es el lenguaje de
-                                    programación java en el cual he construído dos sistemas uno de asistencias y otro de
-                                    inventario, con el framework JSF.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio Item 5-->
-                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350">
-                            <img class="card-img-top" src="assets/5.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">PYTHON</h4>
-                                <p class="card-text">Con python he trabajado con el framawork de Django.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio Item 6-->
-                <div class="col-md-6 col-lg-4">
-                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                        <div
-                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white"><i
-                                    class="fas fa-plus fa-3x"></i></div>
-                        </div>
-                        <div class="card" style="width:350">
-                            <img class="card-img-top" src="assets/6.png" alt="Card image">
-                            <div class="card-body">
-                                <h4 class="card-title">PHP</h4>
-                                <p class="card-text">Con el lenguaje de php he trabajado con ayuda de el framework
-                                    Laravel.</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About Section-->
-    <section class="page-section bg-primary text-white mb-0" id="about">
-        <div class="container">
-            <!-- About Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- About Section Content-->
-            <div class="row">
-                <div class="col-lg-4 ms-auto">
-                    <p class="lead">...</p>
-                </div>
-                <div class="col-lg-4 me-auto">
-                    <p class="lead">...</p>
-                </div>
-            </div>
-            <!-- About Section Button-->
-            <div class="text-center mt-4">
-                <a class="btn btn-xl btn-outline-light" href="https://startbootstrap.com/theme/freelancer/">
-                    <i class="fas fa-download me-2"></i>
-                    Free Download!
-                </a>
-            </div>
-        </div>
-    </section>
-    <!-- Contact Section-->
-    <section class="page-section" id="contact">
-        <div class="container">
-            <!-- Contact Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contàctame</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Contact Section Form-->
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-xl-7">
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                        <!-- Name input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Enter your name..."
-                                data-sb-validations="required" />
-                            <label for="name">Full name</label>
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                        </div>
-                        <!-- Email address input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="email" type="email" placeholder="name@example.com"
-                                data-sb-validations="required,email" />
-                            <label for="email">Email address</label>
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
-                        </div>
-                        <!-- Phone number input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890"
-                                data-sb-validations="required" />
-                            <label for="phone">Phone number</label>
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
-                            </div>
-                        </div>
-                        <!-- Message input-->
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" type="text"
-                                placeholder="Enter your message here..." style="height: 10rem"
-                                data-sb-validations="required"></textarea>
-                            <label for="message">Message</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
-                            </div>
-                        </div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a
-                                    href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage">
-                            <div class="text-center text-danger mb-3">Error sending message!</div>
-                        </div>
-                        <!-- Submit Button-->
-                        <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer-->
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="row">
-                <!-- Footer Location-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">localización</h4>
-                    <p class="lead mb-0">
-                        ortegadaniel588@gmail.com
-                        <br />
-                        Calle-20#33-26
-                    </p>
-                </div>
-                <!-- Footer Social Icons-->
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Around the Web</h4>
-                    <a class="btn btn-outline-light btn-social mx-1"
-                        href="https://www.facebook.com/danielestevan.ortega/"><i
-                            class="fab fa-fw fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i
-                            class="fab fa-fw fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
-                </div>
-                <!-- Footer About Text-->
-                <div class="col-lg-4">
-                    <h4 class="text-uppercase mb-4">About Freelancer</h4>
-                    <p class="lead mb-0">
-                        Freelance is a free to use, MIT licensed Bootstrap theme created by
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
-                        .
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Copyright Section-->
-    <div class="copyright py-4 text-center text-white">
-        <div class="container">
-            <marquee>Copyright &copy; Mi pàgina 2023</marquee>
-        </div>
-
+<!-- NAV -->
+<nav class="navbar navbar-dark fixed-top">
+    <div class="container">
+        <span class="navbar-brand fw-bold">MiPortafolio</span>
     </div>
-    <!-- Portfolio Modals-->
-    <!-- Portfolio Modal 1-->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cabin.png" alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Soy tecnologo en analisis y desarrollo de sistemas de informacion,
-                                    tecnico en sistemas y tecnico en asistente administrativo.</p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div>
+        <h1>Creo experiencias digitales premium</h1>
+        <p class="fs-4 text-white-50">Web • Móvil • Escritorio • IA</p>
+        <a href="#proyectos" class="btn btn-light mt-4 px-4 py-2 rounded-pill">Ver Proyectos</a>
+    </div>
+
+    <canvas id="particles"></canvas>
+    <canvas id="hero3d"></canvas>
+</section>
+
+<!-- SOBRE MI -->
+<section class="container py-5" id="sobre-mi">
+    <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+            <img src="assets\perfil.png" class="perfil-img">
+        </div>
+        <div class="col-md-8">
+            <h2 class="section-title">Sobre mí</h2>
+            <p class="fs-5">
+                Ingeniero en sistemas y desarrollador especializado en crear productos digitales 
+                premium con diseño minimalista, tecnologías modernas y experiencias inmersivas.
+            </p>
         </div>
     </div>
-    <!-- Portfolio Modal 2-->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos" class="projects-section">
+    <div class="projects-container">
+
+        <h2 class="projects-title">Proyectos destacados</h2>
+        <p class="projects-subtitle">
+            Una selección de trabajos que reflejan experiencia en diferentes dominios tecnológicos.
+        </p>
+
+        <!-- Filtros -->
+        <div class="category-filter">
+            <button class="filter-btn active" data-category="all">Todos</button>
+            <button class="filter-btn" data-category="web">Web</button>
+            <button class="filter-btn" data-category="mobile">Móvil</button>
+            <button class="filter-btn" data-category="desktop">Escritorio</button>
+            <button class="filter-btn" data-category="ai">IA</button>
         </div>
+
+        <!-- Grid -->
+        <div class="projects-grid" id="projectsGrid"></div>
+
+        <div class="no-results" id="noResults">No hay proyectos en esta categoría</div>
+
     </div>
-    <!-- Portfolio Modal 3-->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contact-section">
+    <h2 class="section-title">Contacto</h2>
+    <p class="text-white-50 mb-4 fs-5">¿Listo para crear algo increíble?</p>
+
+    <div class="social-icons">
+        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="mailto:correo@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
-    <!-- Portfolio Modal 4-->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+</section>
+
+<!-- MODAL 3D -->
+<div class="modal-overlay" id="projectModal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeProjectModal()">×</div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc" style="color:#555"></p>
+        <canvas id="modalCanvas"></canvas>
     </div>
-    <!-- Portfolio Modal 5-->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Portfolio Modal 6-->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button></div>
-                <div class="modal-body text-center pb-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title-->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
-                                <!-- Icon Divider-->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image-->
-                                <img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png"
-                                    alt="..." />
-                                <!-- Portfolio Modal - Text-->
-                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque
-                                    assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam
-                                    velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.
-                                </p>
-                                <button class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="fas fa-xmark fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</div>
+
+<script>
+
+/* -------------------------------- CURSOR -------------------------------- */
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", (e)=>{
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
+/* -------------------------------- SCROLL REVEAL --------------------------- */
+ScrollReveal().reveal('.section-title', {duration: 1500, distance: "40px", origin:"bottom"});
+
+/* -------------------------------- PARTICULAS ------------------------------ */
+const canvasParticles = document.getElementById("particles");
+const ctx = canvasParticles.getContext("2d");
+
+canvasParticles.width = innerWidth;
+canvasParticles.height = innerHeight;
+
+const particles = [];
+for(let i=0;i<130;i++){
+    particles.push({
+        x: Math.random()*innerWidth,
+        y: Math.random()*innerHeight,
+        size: Math.random()*2,
+        speed: Math.random()*0.7
+    });
+}
+
+function animateParticles(){
+    ctx.clearRect(0,0,canvasParticles.width, canvasParticles.height);
+    ctx.fillStyle = "rgba(255,255,255,0.7)";
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fill();
+        p.y -= p.speed;
+        if(p.y < 0) p.y = innerHeight;
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* -------------------------------- THREE HERO ----------------------------- */
+const heroCanvas = document.getElementById("hero3d");
+
+let scene = new THREE.Scene();
+let camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+let renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha:true });
+
+renderer.setSize(innerWidth, innerHeight);
+camera.position.z = 3;
+
+const geometry = new THREE.TorusKnotGeometry(1,0.3,150,20);
+const material = new THREE.MeshStandardMaterial({
+    color:0xffffff,
+    metalness: 0.9,
+    roughness: 0.2
+});
+const torus = new THREE.Mesh(geometry, material);
+scene.add(torus);
+
+const light = new THREE.PointLight(0xffffff,2);
+light.position.set(5,5,5);
+scene.add(light);
+
+function animate(){
+    requestAnimationFrame(animate);
+    torus.rotation.x += 0.004;
+    torus.rotation.y += 0.005;
+    renderer.render(scene,camera);
+}
+animate();
+
+/* -------------------------------- PROYECTOS ------------------------------- */
+const projects = [
+    { id:1, url:"assets/webiventariologin.png", title:"Sitio Web Moderno", desc:"Diseño premium con UI minimalista.", category:"web" },
+    { id:2, url:"", title:"App Móvil UX", desc:"Aplicación móvil responsiva y fluida.", category:"mobile" },
+    { id:3, url:"", title:"Software Desktop", desc:"Plataforma robusta de escritorio.", category:"desktop" },
+    { id:4, url:"", title:"Sistema de IA", desc:"Modelo inteligente con visión computacional.", category:"ai" },
+];
+
+const grid = document.getElementById("projectsGrid");
+const noResults = document.getElementById("noResults");
+
+function renderProjects(categ="all"){
+    grid.innerHTML="";
+    const filtered = categ==="all" ? projects : projects.filter(p=>p.category===categ);
+
+    noResults.style.display = filtered.length===0 ? "block":"none";
+
+    filtered.forEach((p,index)=>{
+        const div = document.createElement("div");
+        div.className = "project-card";
+        div.style.animation = "fade .5s ease forwards";
+        div.style.animationDelay = `${index * 0.1}s`;
+        div.innerHTML = `
+            <img src="${p.url}" style="width: 100%; height: auto;"></img>
+            <br>
+            <br>
+            <h3 class="project-title">${p.title}</h3>
+            <p class="project-desc">${p.desc}</p>
+        `;
+        div.onclick = ()=> openProjectModal(p);
+        grid.appendChild(div);
+    });
+}
+renderProjects();
+
+/* Filtros */
+document.querySelectorAll(".filter-btn").forEach(btn=>{
+    btn.onclick=()=>{
+        document.querySelector(".filter-btn.active").classList.remove("active");
+        btn.classList.add("active");
+        renderProjects(btn.dataset.category);
+    }
+});
+
+/* -------------------------------- MODAL 3D -------------------------------- */
+let modalScene, modalCamera, modalRenderer, modalObject;
+
+function openProjectModal(p){
+    document.getElementById("modalTitle").innerText = p.title;
+    document.getElementById("modalDesc").innerText = p.desc;
+    document.getElementById("projectModal").style.display="flex";
+    initModal3D();
+}
+
+function closeProjectModal(){
+    document.getElementById("projectModal").style.display="none";
+}
+
+function initModal3D(){
+    const canvas = document.getElementById("modalCanvas");
+
+    modalScene = new THREE.Scene();
+    modalCamera = new THREE.PerspectiveCamera(75,canvas.clientWidth/350,0.1,1000);
+    modalRenderer = new THREE.WebGLRenderer({canvas, alpha:true});
+
+    modalRenderer.setSize(canvas.clientWidth,350);
+    modalCamera.position.z = 3;
+
+    const geometry = new THREE.TorusGeometry(1,0.35,120,20);
+    const material = new THREE.MeshStandardMaterial({
+        color:0x111111,
+        metalness: 1,
+        roughness: 0.2
+    });
+
+    modalObject = new THREE.Mesh(geometry,material);
+    modalScene.add(modalObject);
+
+    const light = new THREE.PointLight(0xffffff,2);
+    light.position.set(3,3,3);
+    modalScene.add(light);
+
+    function animate3d(){
+        requestAnimationFrame(animate3d);
+        modalObject.rotation.x += 0.005;
+        modalObject.rotation.y += 0.004;
+        modalRenderer.render(modalScene,modalCamera);
+    }
+    animate3d();
+}
+
+</script>
+
 </body>
-
 </html>
+
