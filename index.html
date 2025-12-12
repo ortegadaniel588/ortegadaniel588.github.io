@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,505 +21,632 @@
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<style>
+    <style>
+        /*NEW UI*/
+        /* From Uiverse.io by 212004ALJI */
+        button,
+        button::after {
+            padding: 10px 50px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: transparent;
+            position: relative;
+        }
 
-/* -------------------------------------------------------------
+        button::after {
+            --move1: inset(50% 50% 50% 50%);
+            --move2: inset(31% 0 40% 0);
+            --move3: inset(39% 0 15% 0);
+            --move4: inset(45% 0 40% 0);
+            --move5: inset(45% 0 6% 0);
+            --move6: inset(14% 0 61% 0);
+            clip-path: var(--move1);
+            content: '010001010';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: block;
+        }
+
+        button:hover::after {
+            animation: glitch_4011 1s;
+            text-shadow: 10 10px 10px black;
+            animation-timing-function: steps(2, end);
+            text-shadow: -3px -3px 0px #1df2f0, 3px 3px 0px #E94BE8;
+            background-color: transparent;
+            border: 3px solid rgb(0, 255, 213);
+        }
+
+        button:hover {
+            text-shadow: -1px -1px 0px #1df2f0, 1px 1px 0px #E94BE8;
+        }
+
+        button:hover {
+            background-color: transparent;
+            border: 1px solid rgb(0, 255, 213);
+            box-shadow: 0px 10px 10px -10px rgb(0, 255, 213);
+        }
+
+        @keyframes glitch_4011 {
+            0% {
+                clip-path: var(--move1);
+                transform: translate(0px, -10px);
+            }
+
+            10% {
+                clip-path: var(--move2);
+                transform: translate(-10px, 10px);
+            }
+
+            20% {
+                clip-path: var(--move3);
+                transform: translate(10px, 0px);
+            }
+
+            30% {
+                clip-path: var(--move4);
+                transform: translate(-10px, 10px);
+            }
+
+            40% {
+                clip-path: var(--move5);
+                transform: translate(10px, -10px);
+            }
+
+            50% {
+                clip-path: var(--move6);
+                transform: translate(-10px, 10px);
+            }
+
+            60% {
+                clip-path: var(--move1);
+                transform: translate(10px, -10px);
+            }
+
+            70% {
+                clip-path: var(--move3);
+                transform: translate(-10px, 10px);
+            }
+
+            80% {
+                clip-path: var(--move2);
+                transform: translate(10px, -10px);
+            }
+
+            90% {
+                clip-path: var(--move4);
+                transform: translate(-10px, 10px);
+            }
+
+            100% {
+                clip-path: var(--move1);
+                transform: translate(0);
+            }
+        }
+
+
+
+        /* -------------------------------------------------------------
 ------------------------ GLOBAL STYLE --------------------------
 --------------------------------------------------------------*/
-body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    font-family: "Inter", sans-serif;
-    overflow-x: hidden;
-}
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
 
-/* NAV */
-nav {
-    background: rgba(0,0,0,0.6) !important;
-    backdrop-filter: blur(12px);
-    padding: 15px 0;
-}
+        /* NAV */
+        nav {
+            background: rgba(0, 0, 0, 0.6) !important;
+            backdrop-filter: blur(12px);
+            padding: 15px 0;
+        }
 
-/* Cursor premium */
-.cursor {
-    width: 20px;
-    height: 20px;
-    position: fixed;
-    border: 2px solid white;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform .12s ease-out;
-}
+        /* Cursor premium */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            position: fixed;
+            border: 2px solid white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform .12s ease-out;
+        }
 
-/* -------------------------------------------------------------
+        /* -------------------------------------------------------------
 ------------------------ HERO SECTION --------------------------
 --------------------------------------------------------------*/
-#hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-#particles {
-    position: absolute;
-    width: 100%; height: 100%;
-    z-index: -2;
-}
+        #particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
 
-#hero3d {
-    position: absolute;
-    width: 100%; height: 100%;
-    z-index: -3;
-}
+        #hero3d {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+        }
 
-#hero h1 {
-    font-size: 3.8rem;
-    font-weight: 800;
-}
+        #hero h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+        }
 
-/* -------------------------------------------------------------
+        /* -------------------------------------------------------------
 ------------------------ SOBRE MI ------------------------------
 --------------------------------------------------------------*/
 
-.perfil-img {
-    width: 260px;
-    height: 260px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 0 35px rgba(255,255,255,0.25);
-    transition: .4s;
-}
-.perfil-img:hover {
-    transform: scale(1.05);
-}
+        .perfil-img {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
+            transition: .4s;
+        }
 
-.section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
+        .perfil-img:hover {
+            transform: scale(1.05);
+        }
 
-/* -------------------------------------------------------------
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* -------------------------------------------------------------
 -------------------------- PROYECTOS ---------------------------
 --------------------------------------------------------------*/
 
-.projects-section {
-    background: #fff;
-    color: #000;
-    padding: 140px 20px;
-}
+        .projects-section {
+            background: #fff;
+            color: #000;
+            padding: 140px 20px;
+        }
 
-.projects-container {
-    max-width: 1200px;
-    margin: auto;
-}
+        .projects-container {
+            max-width: 1200px;
+            margin: auto;
+        }
 
-.projects-title {
-    font-size: 3.8rem;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
+        .projects-title {
+            font-size: 3.8rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
 
-.projects-subtitle {
-    font-size: 1.3rem;
-    color: #555;
-    max-width: 600px;
-    text-align: center;
-    margin: 15px auto 50px;
-}
+        .projects-subtitle {
+            font-size: 1.3rem;
+            color: #555;
+            max-width: 600px;
+            text-align: center;
+            margin: 15px auto 50px;
+        }
 
-/* Filtros */
-.category-filter {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 50px;
-    flex-wrap: wrap;
-}
+        /* Filtros */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
 
-.filter-btn {
-    padding: 10px 24px;
-    border-radius: 25px;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: .3s;
-}
-.filter-btn:hover {
-    background: #e6e6e6;
-}
-.filter-btn.active {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: .3s;
+        }
 
-/* Grid */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
-    gap: 30px;
-}
+        .filter-btn:hover {
+            background: #e6e6e6;
+        }
 
-/* Card estilo Apple */
-.project-card {
-    background: #f7f7f7;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: .3s;
-}
-.project-card:hover {
-    transform: scale(1.035);
-    box-shadow: 0 12px 45px rgba(0,0,0,0.15);
-}
+        .filter-btn.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
 
-.project-title {
-    font-weight: 600;
-    font-size: 1.4rem;
-}
-.project-desc {
-    color: #555;
-    margin-top: 8px;
-}
+        /* Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
 
-/* No results */
-.no-results {
-    display:none;
-    color:#777;
-    text-align:center;
-    margin-top:50px;
-}
+        /* Card estilo Apple */
+        .project-card {
+            background: #f7f7f7;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: .3s;
+        }
 
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-}
+        .project-card:hover {
+            transform: scale(1.035);
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.15);
+        }
 
-.modal-content {
-    background:#fff;
-    width: 75%;
-    padding: 35px;
-    border-radius: 20px;
-    color:#000;
-    position: relative;
-    animation: modalShow .4s forwards;
-}
-@keyframes modalShow {
-    from {opacity:0; transform: scale(.7);}
-    to {opacity:1; transform: scale(1);}
-}
+        .project-title {
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
 
-.modal-close {
-    position:absolute;
-    right:20px;
-    top:10px;
-    font-size:2rem;
-    cursor:pointer;
-}
+        .project-desc {
+            color: #555;
+            margin-top: 8px;
+        }
 
-#modalCanvas {
-    width: 100%;
-    height: 350px;
-    margin-top: 20px;
-}
+        /* No results */
+        .no-results {
+            display: none;
+            color: #777;
+            text-align: center;
+            margin-top: 50px;
+        }
 
-/* -------------------------------------------------------------
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+
+        .modal-content {
+            background: #fff;
+            width: 75%;
+            padding: 35px;
+            border-radius: 20px;
+            color: #000;
+            position: relative;
+            animation: modalShow .4s forwards;
+        }
+
+        @keyframes modalShow {
+            from {
+                opacity: 0;
+                transform: scale(.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        #modalCanvas {
+            width: 100%;
+            height: 350px;
+            margin-top: 20px;
+        }
+
+        /* -------------------------------------------------------------
 ---------------------------- CONTACTO --------------------------
 --------------------------------------------------------------*/
 
-.contact-section {
-    background:#0a0a0a;
-    padding:100px 20px;
-    text-align:center;
-}
+        .contact-section {
+            background: #0a0a0a;
+            padding: 100px 20px;
+            text-align: center;
+        }
 
-.social-icons a {
-    font-size: 2.8rem;
-    margin: 0 18px;
-    color:white;
-    transition:.3s;
-}
-.social-icons a:hover {
-    color:#999;
-}
-</style>
+        .social-icons a {
+            font-size: 2.8rem;
+            margin: 0 18px;
+            color: white;
+            transition: .3s;
+        }
+
+        .social-icons a:hover {
+            color: #999;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
 
-<!-- NAV -->
-<nav class="navbar navbar-dark fixed-top">
-    <div class="container">
-        <span class="navbar-brand fw-bold">MiPortafolio</span>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-    <div>
-        <h1>Creo experiencias digitales premium</h1>
-        <p class="fs-4 text-white-50">Web • Móvil • Escritorio • IA</p>
-        <a href="#proyectos" class="btn btn-light mt-4 px-4 py-2 rounded-pill">Ver Proyectos</a>
-    </div>
-
-    <canvas id="particles"></canvas>
-    <canvas id="hero3d"></canvas>
-</section>
-
-<!-- SOBRE MI -->
-<section class="container py-5" id="sobre-mi">
-    <div class="row align-items-center">
-        <div class="col-md-4 text-center">
-            <img src="assets\perfil.png" class="perfil-img">
+    <!-- NAV -->
+    <nav class="navbar navbar-dark fixed-top">
+        <div class="container">
+            <span class="navbar-brand fw-bold">MiPortafolio</span>
         </div>
-        <div class="col-md-8">
-            <h2 class="section-title">Sobre mí</h2>
-            <p class="fs-5">
-                Ingeniero en sistemas y desarrollador especializado en crear productos digitales 
-                premium con diseño minimalista, tecnologías modernas y experiencias inmersivas.
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div>
+            <h1>Creo experiencias digitales premium</h1>
+            <p class="fs-4 text-white-50">Web • Móvil • Escritorio • IA</p>
+            <a href="#proyectos" class="btn btn-light mt-4 px-4 py-2 rounded-pill">Ver Proyectos</a>
+            <!--From Uiverse.io by 212004ALJI -->
+            
+        </div>
+
+        <canvas id="particles"></canvas>
+        <canvas id="hero3d"></canvas>
+    </section>
+
+    <!-- SOBRE MI -->
+    <section class="container py-5" id="sobre-mi">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+                <img src="assets\perfil.png" class="perfil-img">
+            </div>
+            <div class="col-md-8">
+                <h2 class="section-title">Sobre mí</h2>
+                <p class="fs-5">
+                    Ingeniero en sistemas y desarrollador especializado en crear productos digitales
+                    premium con diseño minimalista, tecnologías modernas y experiencias inmersivas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="projects-section">
+        <div class="projects-container">
+
+            <h2 class="projects-title">Proyectos destacados</h2>
+            <p class="projects-subtitle">
+                Una selección de trabajos que reflejan experiencia en diferentes dominios tecnológicos.
             </p>
+
+            <!-- Filtros -->
+            <div class="category-filter">
+                <button class="filter-btn active" data-category="all">Todos</button>
+                <button class="filter-btn" data-category="web">Web</button>
+                <button class="filter-btn" data-category="mobile">Móvil</button>
+                <button class="filter-btn" data-category="desktop">Escritorio</button>
+                <button class="filter-btn" data-category="ai">IA</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="projects-grid" id="projectsGrid"></div>
+
+            <div class="no-results" id="noResults">No hay proyectos en esta categoría</div>
+
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contact-section">
+        <h2 class="section-title">Contacto</h2>
+        <p class="text-white-50 mb-4 fs-5">¿Listo para crear algo increíble?</p>
+
+        <div class="social-icons">
+            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:correo@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <!-- MODAL 3D -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeProjectModal()">×</div>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc" style="color:#555"></p>
+            <canvas id="modalCanvas"></canvas>
         </div>
     </div>
-</section>
 
-<!-- PROYECTOS -->
-<section id="proyectos" class="projects-section">
-    <div class="projects-container">
+    <script>
 
-        <h2 class="projects-title">Proyectos destacados</h2>
-        <p class="projects-subtitle">
-            Una selección de trabajos que reflejan experiencia en diferentes dominios tecnológicos.
-        </p>
+        /* -------------------------------- CURSOR -------------------------------- */
+        const cursor = document.getElementById("cursor");
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
 
-        <!-- Filtros -->
-        <div class="category-filter">
-            <button class="filter-btn active" data-category="all">Todos</button>
-            <button class="filter-btn" data-category="web">Web</button>
-            <button class="filter-btn" data-category="mobile">Móvil</button>
-            <button class="filter-btn" data-category="desktop">Escritorio</button>
-            <button class="filter-btn" data-category="ai">IA</button>
-        </div>
+        /* -------------------------------- SCROLL REVEAL --------------------------- */
+        ScrollReveal().reveal('.section-title', { duration: 1500, distance: "40px", origin: "bottom" });
 
-        <!-- Grid -->
-        <div class="projects-grid" id="projectsGrid"></div>
+        /* -------------------------------- PARTICULAS ------------------------------ */
+        const canvasParticles = document.getElementById("particles");
+        const ctx = canvasParticles.getContext("2d");
 
-        <div class="no-results" id="noResults">No hay proyectos en esta categoría</div>
+        canvasParticles.width = innerWidth;
+        canvasParticles.height = innerHeight;
 
-    </div>
-</section>
+        const particles = [];
+        for (let i = 0; i < 130; i++) {
+            particles.push({
+                x: Math.random() * innerWidth,
+                y: Math.random() * innerHeight,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.7
+            });
+        }
 
-<!-- CONTACTO -->
-<section class="contact-section">
-    <h2 class="section-title">Contacto</h2>
-    <p class="text-white-50 mb-4 fs-5">¿Listo para crear algo increíble?</p>
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvasParticles.width, canvasParticles.height);
+            ctx.fillStyle = "rgba(255,255,255,0.7)";
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.y -= p.speed;
+                if (p.y < 0) p.y = innerHeight;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
 
-    <div class="social-icons">
-        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="mailto:correo@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
-</section>
+        /* -------------------------------- THREE HERO ----------------------------- */
+        const heroCanvas = document.getElementById("hero3d");
 
-<!-- MODAL 3D -->
-<div class="modal-overlay" id="projectModal">
-    <div class="modal-content">
-        <div class="modal-close" onclick="closeProjectModal()">×</div>
-        <h2 id="modalTitle"></h2>
-        <p id="modalDesc" style="color:#555"></p>
-        <canvas id="modalCanvas"></canvas>
-    </div>
-</div>
+        let scene = new THREE.Scene();
+        let camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+        let renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true });
 
-<script>
+        renderer.setSize(innerWidth, innerHeight);
+        camera.position.z = 3;
 
-/* -------------------------------- CURSOR -------------------------------- */
-const cursor = document.getElementById("cursor");
-document.addEventListener("mousemove", (e)=>{
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
-});
+        const geometry = new THREE.TorusKnotGeometry(1, 0.3, 150, 20);
+        const material = new THREE.MeshStandardMaterial({
+            color: 0xffffff,
+            metalness: 0.9,
+            roughness: 0.2
+        });
+        const torus = new THREE.Mesh(geometry, material);
+        scene.add(torus);
 
-/* -------------------------------- SCROLL REVEAL --------------------------- */
-ScrollReveal().reveal('.section-title', {duration: 1500, distance: "40px", origin:"bottom"});
+        const light = new THREE.PointLight(0xffffff, 2);
+        light.position.set(5, 5, 5);
+        scene.add(light);
 
-/* -------------------------------- PARTICULAS ------------------------------ */
-const canvasParticles = document.getElementById("particles");
-const ctx = canvasParticles.getContext("2d");
+        function animate() {
+            requestAnimationFrame(animate);
+            torus.rotation.x += 0.004;
+            torus.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        }
+        animate();
 
-canvasParticles.width = innerWidth;
-canvasParticles.height = innerHeight;
+        /* -------------------------------- PROYECTOS ------------------------------- */
+        const projects = [
+            { id: 1, url: "assets/webiventariologin.png", title: "Sitio Web Moderno", desc: "Diseño premium con UI minimalista.", category: "web" },
+            { id: 2, url: "", title: "App Móvil UX", desc: "Aplicación móvil responsiva y fluida.", category: "mobile" },
+            { id: 3, url: "", title: "Software Desktop", desc: "Plataforma robusta de escritorio.", category: "desktop" },
+            { id: 4, url: "", title: "Sistema de IA", desc: "Modelo inteligente con visión computacional.", category: "ai" },
+        ];
 
-const particles = [];
-for(let i=0;i<130;i++){
-    particles.push({
-        x: Math.random()*innerWidth,
-        y: Math.random()*innerHeight,
-        size: Math.random()*2,
-        speed: Math.random()*0.7
-    });
-}
+        const grid = document.getElementById("projectsGrid");
+        const noResults = document.getElementById("noResults");
 
-function animateParticles(){
-    ctx.clearRect(0,0,canvasParticles.width, canvasParticles.height);
-    ctx.fillStyle = "rgba(255,255,255,0.7)";
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-        ctx.fill();
-        p.y -= p.speed;
-        if(p.y < 0) p.y = innerHeight;
-    });
-    requestAnimationFrame(animateParticles);
-}
-animateParticles();
+        function renderProjects(categ = "all") {
+            grid.innerHTML = "";
+            const filtered = categ === "all" ? projects : projects.filter(p => p.category === categ);
 
-/* -------------------------------- THREE HERO ----------------------------- */
-const heroCanvas = document.getElementById("hero3d");
+            noResults.style.display = filtered.length === 0 ? "block" : "none";
 
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
-let renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha:true });
-
-renderer.setSize(innerWidth, innerHeight);
-camera.position.z = 3;
-
-const geometry = new THREE.TorusKnotGeometry(1,0.3,150,20);
-const material = new THREE.MeshStandardMaterial({
-    color:0xffffff,
-    metalness: 0.9,
-    roughness: 0.2
-});
-const torus = new THREE.Mesh(geometry, material);
-scene.add(torus);
-
-const light = new THREE.PointLight(0xffffff,2);
-light.position.set(5,5,5);
-scene.add(light);
-
-function animate(){
-    requestAnimationFrame(animate);
-    torus.rotation.x += 0.004;
-    torus.rotation.y += 0.005;
-    renderer.render(scene,camera);
-}
-animate();
-
-/* -------------------------------- PROYECTOS ------------------------------- */
-const projects = [
-    { id:1, url:"assets/webiventariologin.png", title:"Sitio Web Moderno", desc:"Diseño premium con UI minimalista.", category:"web" },
-    { id:2, url:"", title:"App Móvil UX", desc:"Aplicación móvil responsiva y fluida.", category:"mobile" },
-    { id:3, url:"", title:"Software Desktop", desc:"Plataforma robusta de escritorio.", category:"desktop" },
-    { id:4, url:"", title:"Sistema de IA", desc:"Modelo inteligente con visión computacional.", category:"ai" },
-];
-
-const grid = document.getElementById("projectsGrid");
-const noResults = document.getElementById("noResults");
-
-function renderProjects(categ="all"){
-    grid.innerHTML="";
-    const filtered = categ==="all" ? projects : projects.filter(p=>p.category===categ);
-
-    noResults.style.display = filtered.length===0 ? "block":"none";
-
-    filtered.forEach((p,index)=>{
-        const div = document.createElement("div");
-        div.className = "project-card";
-        div.style.animation = "fade .5s ease forwards";
-        div.style.animationDelay = `${index * 0.1}s`;
-        div.innerHTML = `
+            filtered.forEach((p, index) => {
+                const div = document.createElement("div");
+                div.className = "project-card";
+                div.style.animation = "fade .5s ease forwards";
+                div.style.animationDelay = `${index * 0.1}s`;
+                div.innerHTML = `
             <img src="${p.url}" style="width: 100%; height: auto;"></img>
             <br>
             <br>
             <h3 class="project-title">${p.title}</h3>
             <p class="project-desc">${p.desc}</p>
         `;
-        div.onclick = ()=> openProjectModal(p);
-        grid.appendChild(div);
-    });
-}
-renderProjects();
+                div.onclick = () => openProjectModal(p);
+                grid.appendChild(div);
+            });
+        }
+        renderProjects();
 
-/* Filtros */
-document.querySelectorAll(".filter-btn").forEach(btn=>{
-    btn.onclick=()=>{
-        document.querySelector(".filter-btn.active").classList.remove("active");
-        btn.classList.add("active");
-        renderProjects(btn.dataset.category);
-    }
-});
+        /* Filtros */
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.onclick = () => {
+                document.querySelector(".filter-btn.active").classList.remove("active");
+                btn.classList.add("active");
+                renderProjects(btn.dataset.category);
+            }
+        });
 
-/* -------------------------------- MODAL 3D -------------------------------- */
-let modalScene, modalCamera, modalRenderer, modalObject;
+        /* -------------------------------- MODAL 3D -------------------------------- */
+        let modalScene, modalCamera, modalRenderer, modalObject;
 
-function openProjectModal(p){
-    document.getElementById("modalTitle").innerText = p.title;
-    document.getElementById("modalDesc").innerText = p.desc;
-    document.getElementById("projectModal").style.display="flex";
-    initModal3D();
-}
+        function openProjectModal(p) {
+            document.getElementById("modalTitle").innerText = p.title;
+            document.getElementById("modalDesc").innerText = p.desc;
+            document.getElementById("projectModal").style.display = "flex";
+            initModal3D();
+        }
 
-function closeProjectModal(){
-    document.getElementById("projectModal").style.display="none";
-}
+        function closeProjectModal() {
+            document.getElementById("projectModal").style.display = "none";
+        }
 
-function initModal3D(){
-    const canvas = document.getElementById("modalCanvas");
+        function initModal3D() {
+            const canvas = document.getElementById("modalCanvas");
 
-    modalScene = new THREE.Scene();
-    modalCamera = new THREE.PerspectiveCamera(75,canvas.clientWidth/350,0.1,1000);
-    modalRenderer = new THREE.WebGLRenderer({canvas, alpha:true});
+            modalScene = new THREE.Scene();
+            modalCamera = new THREE.PerspectiveCamera(75, canvas.clientWidth / 350, 0.1, 1000);
+            modalRenderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
-    modalRenderer.setSize(canvas.clientWidth,350);
-    modalCamera.position.z = 3;
+            modalRenderer.setSize(canvas.clientWidth, 350);
+            modalCamera.position.z = 3;
 
-    const geometry = new THREE.TorusGeometry(1,0.35,120,20);
-    const material = new THREE.MeshStandardMaterial({
-        color:0x111111,
-        metalness: 1,
-        roughness: 0.2
-    });
+            const geometry = new THREE.TorusGeometry(1, 0.35, 120, 20);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x111111,
+                metalness: 1,
+                roughness: 0.2
+            });
 
-    modalObject = new THREE.Mesh(geometry,material);
-    modalScene.add(modalObject);
+            modalObject = new THREE.Mesh(geometry, material);
+            modalScene.add(modalObject);
 
-    const light = new THREE.PointLight(0xffffff,2);
-    light.position.set(3,3,3);
-    modalScene.add(light);
+            const light = new THREE.PointLight(0xffffff, 2);
+            light.position.set(3, 3, 3);
+            modalScene.add(light);
 
-    function animate3d(){
-        requestAnimationFrame(animate3d);
-        modalObject.rotation.x += 0.005;
-        modalObject.rotation.y += 0.004;
-        modalRenderer.render(modalScene,modalCamera);
-    }
-    animate3d();
-}
+            function animate3d() {
+                requestAnimationFrame(animate3d);
+                modalObject.rotation.x += 0.005;
+                modalObject.rotation.y += 0.004;
+                modalRenderer.render(modalScene, modalCamera);
+            }
+            animate3d();
+        }
 
-</script>
+    </script>
 
 </body>
-</html>
 
+</html>
